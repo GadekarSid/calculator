@@ -4,7 +4,6 @@ let history = document.querySelector('.history');
 let currVal = '';
 let prevVal = '';
 let operation = '';
-let prevResult = '';
 let isOperationClicked = false;
 let refreshHistory = false;
 const add = (num1, num2) => Number(num1) + Number(num2);
@@ -61,9 +60,7 @@ function setOperation(e){
         currVal = screenExpression.textContent;
         let result = currVal;
         if(prevVal != '' && currVal != '' && !isOperationClicked){
-            console.log("operation : " + operation);
             result = evaluateResult(operation);
-            console.log("Evaluted result " + result);
             history.textContent = `${prevVal} ${operation} ${currVal}`;
         }
         operation = e.target.innerText;
@@ -75,7 +72,6 @@ function setResult(){
     result = evaluateResult('equals');
      if(result != undefined) {
         history.textContent = `${prevVal} ${operation} ${currVal} =`;
-        prevResult = result;
         prevVal = '';
      }
     displayValue = "";
@@ -117,13 +113,11 @@ clearButton.addEventListener('click',deleteNumber);
 
 
 function appendDecimal(){
-    console.log("Inside append decimal" + displayValue);
     if(displayValue == ""){
         displayValue = "0";
     }
     if (displayValue.includes('.')) return
     displayValue += '.'
-    console.log("Display Value : +" + displayValue);
     screenExpression.textContent = displayValue;
 }
 
